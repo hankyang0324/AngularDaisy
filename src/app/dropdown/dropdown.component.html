@@ -1,0 +1,11 @@
+<div class='container'>
+  <p>{{ id }}</p>
+  <input class='searchInput' [value]='search' (input)='detectInput($event)'>
+  <div class='dropdown' [ngClass]="{show:showDropdown}">
+    <ul class='searchUl'>
+      <li class='searchLi' *ngFor='let data of datas | propFilter:search' (click)='select(data)'>
+        {{ data }}
+      </li>
+    </ul>
+  </div>
+</div>

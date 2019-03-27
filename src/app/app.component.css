@@ -1,0 +1,22 @@
+.btnGroup {
+    display:inline-block;
+    width: 220px;
+    background: rgb(238, 238, 238);
+    border-radius: 10px;
+    border:1px solid lightgrey;
+}
+
+.btn {
+    height: 35px;
+    width: 110px;
+    border-radius: 10px;
+    font-size: 14px;
+    border: none;
+    background: transparent;
+    outline:none;
+}
+
+.chosen {
+    background-color:purple;
+    color:white;
+}
