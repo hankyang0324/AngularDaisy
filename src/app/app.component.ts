@@ -10,12 +10,9 @@ import { DataService } from './data.service';
 export class AppComponent {
   title = 'switchbutton';
   leftBtn: boolean = true;
-  showText: string = 'Group Info'
-  datas:string[] = this.dataService.data;
-  showData: Object = {};
+  showText: string = 'Group Info';
+  showData: Object = {name:'',group:'',color:''};
   showDataKeys:string[] = Object.keys(this.showData);
-
-  constructor(private dataService:DataService){}
 
   switchButton(event:Event) {
     if((<HTMLElement>event.target).textContent == ' Group Info ') {
@@ -29,6 +26,5 @@ export class AppComponent {
 
   showSelected(data:{id:string,name:string}) {
     this.showData[data.id] = data.name;
-    this.showDataKeys = Object.keys(this.showData);
   }
 }

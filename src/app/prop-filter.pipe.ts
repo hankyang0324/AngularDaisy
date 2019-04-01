@@ -7,7 +7,7 @@ export class PropFilterPipe implements PipeTransform {
 
   transform(datas: any, search:string) {
     let arr=[...datas];
-    arr = arr.filter(data => data.includes(search));
+    arr = arr.filter(data => data.indexOf(search)===0);
     return arr;
   }
 

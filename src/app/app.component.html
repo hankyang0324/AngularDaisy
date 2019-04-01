@@ -14,12 +14,12 @@
 </div>
 <p> Show selected button: {{ showText }} </p>
 <hr>
-<div>
-  <span>all the person: </span>
-  <span *ngFor='let data of datas'>{{ data }} </span>
-</div>
-<p *ngFor='let key of showDataKeys; let i=index'> Show selected Dropdown{{ i }}: {{ showData[key] }}</p>
-<hr>
-<app-dropdown [id]="'Person0'" (selected)="showSelected($event)"></app-dropdown>
-<app-dropdown [id]="'Person1'" (selected)="showSelected($event)"></app-dropdown>
-<app-dropdown [id]="'Person2'" (selected)="showSelected($event)"></app-dropdown>
+<p>  
+  name: yang, han, hank, ding, ning, daisy<br>
+  group: 01, 02, 03, 04, 05, 06, 07, 08, 09, 10<br>
+  color: red, orange, yellow, green, blue, purple, black, white
+</p>
+<p *ngFor='let key of showDataKeys'> Show selected {{ key }}: {{ showData[key] }}</p>
+<app-dropdown [id]="'name'" (selected)="showSelected($event)"></app-dropdown>
+<app-dropdown [id]="'group'" (selected)="showSelected($event)"></app-dropdown>
+<app-dropdown [id]="'color'" (selected)="showSelected($event)"></app-dropdown>
