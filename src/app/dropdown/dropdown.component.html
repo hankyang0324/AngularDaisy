@@ -1,5 +1,6 @@
 <div class='container'>
-  <p>{{ id }}</p>
+  <ng-content select="[id]"></ng-content>
+  <!-- <p>{{ id }}</p> -->
   <input class='searchInput' [value]='search' (input)='detectInput($event)'>
   <div class='dropdown' [ngClass]="{show:showDropdown}">
     <ul class='searchUl'>

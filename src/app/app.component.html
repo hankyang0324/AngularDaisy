@@ -20,6 +20,8 @@
   color: red, orange, yellow, green, blue, purple, black, white
 </p>
 <p *ngFor='let key of showDataKeys'> Show selected {{ key }}: {{ showData[key] }}</p>
-<app-dropdown [id]="'name'" (selected)="showSelected($event)"></app-dropdown>
-<app-dropdown [id]="'group'" (selected)="showSelected($event)"></app-dropdown>
-<app-dropdown [id]="'color'" (selected)="showSelected($event)"></app-dropdown>
+<p>Show selected data from ids: {{ showDataFromIds }}</p>
+<app-dropdown [id]="'name'" (selected)="showSelected($event)"><div id>name</div></app-dropdown>
+<app-dropdown [id]="'group'" (selected)="showSelected($event)"><div id>group</div></app-dropdown>
+<app-dropdown [id]="'color'" (selected)="showSelected($event)"><div id>color</div></app-dropdown>
+<app-dropdown [ids]="['name','group','color']" (selected)="showSelected($event)"><div id>name & group & color</div></app-dropdown>

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ObjectUnsubscribedError } from 'rxjs';
-import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +10,7 @@ export class AppComponent {
   leftBtn: boolean = true;
   showText: string = 'Group Info';
   showData: Object = {name:'',group:'',color:''};
+  showDataFromIds: string = '';
   showDataKeys:string[] = Object.keys(this.showData);
 
   switchButton(event:Event) {
@@ -25,6 +24,10 @@ export class AppComponent {
   }
 
   showSelected(data:{id:string,name:string}) {
-    this.showData[data.id] = data.name;
+    if(data.id!=''){
+      this.showData[data.id] = data.name;
+    } else {
+      this.showDataFromIds = data.name;
+    }
   }
 }

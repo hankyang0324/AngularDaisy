@@ -5,9 +5,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PropFilterPipe implements PipeTransform {
 
-  transform(datas: any, search:string) {
+  transform(datas: string[], search:string) {
     let arr=[...datas];
-    arr = arr.filter(data => data.indexOf(search)===0);
+    arr = arr.filter(data => {
+      let splited = data.split(' ');
+      for(let str of splited) {
+        if(str.indexOf(search)===0) return true;
+      }
+      return false;
+    });
     return arr;
   }
 
