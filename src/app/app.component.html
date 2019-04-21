@@ -21,7 +21,10 @@
 </p>
 <p *ngFor='let key of showDataKeys'> Show selected {{ key }}: {{ showData[key] }}</p>
 <p>Show selected data from ids: {{ showDataFromIds }}</p>
-<app-dropdown [id]="'name'" (selected)="showSelected($event)"><div id>name</div></app-dropdown>
-<app-dropdown [id]="'group'" (selected)="showSelected($event)"><div id>group</div></app-dropdown>
-<app-dropdown [id]="'color'" (selected)="showSelected($event)"><div id>color</div></app-dropdown>
-<app-dropdown [ids]="['name','group','color']" (selected)="showSelected($event)"><div id>name & group & color</div></app-dropdown>
+<form [formGroup]="dropDownForm" (ngSubmit)="onSubmit()">
+  <app-dropdown formControlName='name' [id]="'name'" (selected)="showSelected($event)"><div id>name</div></app-dropdown>
+  <app-dropdown formControlName='group' [id]="'group'" (selected)="showSelected($event)"><div id>group</div></app-dropdown>
+  <app-dropdown formControlName='color' [id]="'color'" (selected)="showSelected($event)"><div id>color</div></app-dropdown>
+  <app-dropdown formControlName='multi' [ids]="['name','group','color']" (selected)="showSelected($event)"><div id>name & group & color</div></app-dropdown>
+  <button type="submit">Submit</button>
+</form>

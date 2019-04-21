@@ -1,7 +1,7 @@
 <div class='container'>
   <ng-content select="[id]"></ng-content>
   <!-- <p>{{ id }}</p> -->
-  <input class='searchInput' [value]='search' (input)='detectInput($event)'>
+  <input class='searchInput' [disabled]='disabled' (blur)='onTouched()' [value]='search' (input)='detectInput($event)'>
   <div class='dropdown' [ngClass]="{show:showDropdown}">
     <ul class='searchUl'>
       <li class='searchLi' *ngFor='let data of datas | propFilter:search' (click)='select(data)'>

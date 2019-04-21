@@ -1,17 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'switchbutton';
   leftBtn: boolean = true;
   showText: string = 'Group Info';
   showData: Object = {name:'',group:'',color:''};
   showDataFromIds: string = '';
   showDataKeys:string[] = Object.keys(this.showData);
+
+  dropDownForm: FormGroup;
+
+  ngOnInit() {
+    this.dropDownForm = new FormGroup({
+      'name':new FormControl(null),
+      'group':new FormControl(null),
+      'color':new FormControl(null),
+      'multi':new FormControl(null),
+    })
+  }
 
   switchButton(event:Event) {
     if((<HTMLElement>event.target).textContent == ' Group Info ') {
@@ -29,5 +41,10 @@ export class AppComponent {
     } else {
       this.showDataFromIds = data.name;
     }
+  }
+
+  onSubmit() {
+    // TODO: Use EventEmitter with form value
+    console.log(this.dropDownForm.value);
   }
 }
