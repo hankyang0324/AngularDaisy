@@ -1,11 +1,23 @@
 <div class='container'>
-  <ng-content select="[id]"></ng-content>
-  <!-- <p>{{ id }}</p> -->
-  <input class='searchInput' [disabled]='disabled' (blur)='onTouched()' [value]='search' (input)='detectInput($event)'>
-  <div class='dropdown' [ngClass]="{show:showDropdown}">
+  <ng-content></ng-content>
+  <input 
+    class='searchInput' 
+    [ngStyle]='{width:width}'
+    [ngClass]='{disable:disabled}'
+    [disabled]='disabled' 
+    [placeholder]='placeholder' 
+    (blur)='hide()' 
+    [value]='search'
+    (input)='detectInput($event)' 
+    (click)='show()'>
+  <div class='dropdown' 
+    [@divState]="showDropdown"
+    [ngStyle]='{width:dropdownWidth,"max-height":maxHeight}'>
     <ul class='searchUl'>
-      <li class='searchLi' *ngFor='let data of datas | propFilter:search' (click)='select(data)'>
-        {{ data }}
+      <li class='searchLi' 
+        *ngFor='let option of options | propFilter:search' 
+        (click)='select(option)'>
+        {{ option }}
       </li>
     </ul>
   </div>

@@ -1,0 +1,14 @@
+<input type='text' 
+  class='dateInput'
+  [(ngModel)]='date'
+  (keydown)='detectChange($event)'
+  (click)='onClick()'
+  (blur)='onBlur($event)'
+  [disabled]='disabled'
+  [ngClass]='{disable:disabled}'
+  [ngStyle]='{width:width}'
+  placeholder='mm/dd/yyyy'
+  testDirective>
+<span class='warningSpan' *ngIf='invalid'>
+  Not a valid date!
+</span>

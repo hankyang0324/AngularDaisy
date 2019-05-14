@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit{
   title = 'switchbutton';
@@ -13,15 +14,33 @@ export class AppComponent implements OnInit{
   showData: Object = {name:'',group:'',color:''};
   showDataFromIds: string = '';
   showDataKeys:string[] = Object.keys(this.showData);
+  nameOptions:string[] = [];
+  groupOptions:string[] = [];
+  colorOptions:string[] = [];
+  multiOptions:string[] = [];
+  dropDownForm: FormGroup = this.fb.group({
+    name:[null],
+    group:[null],
+    color:[null],
+    multi:[null],
+    date:[null]
+  })
 
-  dropDownForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private dataService:DataService){}
 
   ngOnInit() {
-    this.dropDownForm = new FormGroup({
-      'name':new FormControl(null),
-      'group':new FormControl(null),
-      'color':new FormControl(null),
-      'multi':new FormControl(null),
+    this.dataService.getData('name').then(datas => {
+      this.nameOptions = datas;
+      this.multiOptions = this.multiOptions.concat(datas);
+    })
+    this.dataService.getData('group').then(datas => {
+      this.groupOptions = datas;
+      this.multiOptions = this.multiOptions.concat(datas);
+    })
+    this.dataService.getData('color').then(datas => {
+      this.colorOptions = datas;
+      this.multiOptions = this.multiOptions.concat(datas);
     })
   }
 
@@ -35,16 +54,17 @@ export class AppComponent implements OnInit{
     }
   }
 
-  showSelected(data:{id:string,name:string}) {
+  showSelected(data:{id:string,value:string}) {
     if(data.id!=''){
-      this.showData[data.id] = data.name;
+      this.showData[data.id] = data.value;
     } else {
-      this.showDataFromIds = data.name;
+      this.showDataFromIds = data.value;
     }
   }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log(this.dropDownForm.value);
+    this.dropDownForm.reset();
   }
 }

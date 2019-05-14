@@ -10,7 +10,7 @@ export class PropFilterPipe implements PipeTransform {
     arr = arr.filter(data => {
       let splited = data.split(' ');
       for(let str of splited) {
-        if(str.indexOf(search)===0) return true;
+        if(str.indexOf(search)===0 || data.indexOf(search)===0) return true;
       }
       return false;
     });

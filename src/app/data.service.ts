@@ -18,7 +18,7 @@ export class DataService {
         if(id==='name') resolve([...this.name]);
         if(id==='group') resolve([...this.group]);
         if(id==='color') resolve([...this.color]);
-      },2000);
+      },1000);
     });
     return promise;
   }
