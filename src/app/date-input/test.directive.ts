@@ -235,8 +235,15 @@ export class TestDirective {
               this.el.nativeElement.setSelectionRange(pos+1,pos+1,'none');
               return;
             }
-          } 
+          }
           this.preVal = this.preVal.substr(0,pos)+3+this.preVal.substr(pos+1);//大月，day高位改成3
+          this.ngModelChange.emit(this.preVal);
+          this.render.setElementProperty(this.el.nativeElement, 'value', this.preVal);
+          this.el.nativeElement.setSelectionRange(pos+1,pos+1,'none');
+          return;
+        }
+        if(event.key === '0'&& this.preVal[4] === '0') { //day00改成day01
+          this.preVal = this.preVal.substr(0,pos)+'01'+this.preVal.substr(pos+2);
           this.ngModelChange.emit(this.preVal);
           this.render.setElementProperty(this.el.nativeElement, 'value', this.preVal);
           this.el.nativeElement.setSelectionRange(pos+1,pos+1,'none');
@@ -279,11 +286,33 @@ export class TestDirective {
           this.el.nativeElement.setSelectionRange(pos+1,pos+1,'none');
           return;
         }
+        if(event.key === '0'&& this.preVal[3] === '0') { //day00改成day01
+          this.preVal = this.preVal.substr(0,pos-1)+'01'+this.preVal.substr(pos+1);
+          this.ngModelChange.emit(this.preVal);
+          this.render.setElementProperty(this.el.nativeElement, 'value', this.preVal);
+          this.el.nativeElement.setSelectionRange(pos+1,pos+1,'none');
+          return;
+        }
       }
 
-      if(pos===9){ //输入年最后一位时判断闰年
-        if(this.preVal.substr(0,5)==='02/29' && !this.isLeapYear(this.preVal.substr(6,3)+event.key)){ //平年02/29改02/28
-          this.preVal = '02/28/'+this.preVal.substr(6,3)+event.key;
+      if(pos>=6){ //year
+        this.preVal = this.preVal.substr(0,pos) + event.key + this.preVal.substr(pos+1);
+        if(this.preVal.substr(6,4) === '0000') { //0000年改0001年
+          if(this.preVal.substr(0,5) === '02/29') {
+            this.preVal = '02/28/0001';
+            this.ngModelChange.emit(this.preVal);
+            this.render.setElementProperty(this.el.nativeElement, 'value', this.preVal);
+            this.el.nativeElement.setSelectionRange(pos+1,pos+1,'none');
+            return;
+          }
+          this.preVal = this.preVal.substr(0,6)+'0001';
+          this.ngModelChange.emit(this.preVal);
+          this.render.setElementProperty(this.el.nativeElement, 'value', this.preVal);
+          this.el.nativeElement.setSelectionRange(pos+1,pos+1,'none');
+          return;
+        }
+        if(this.preVal.substr(0,5)==='02/29' && !this.isLeapYear(this.preVal.substr(6,4))){ //平年02/29改02/28
+          this.preVal = '02/28/'+this.preVal.substr(6,4);
           this.ngModelChange.emit(this.preVal);
           this.render.setElementProperty(this.el.nativeElement, 'value', this.preVal);
           this.el.nativeElement.setSelectionRange(pos+1,pos+1,'none');
