@@ -1,7 +1,7 @@
 <input type='text' 
   class='dateInput'
   [ngModel]='date'
-  (keydown)='detectChange($event)'
+  (ngModelChange)='detectChange($event)'
   (click)='onClick()'
   (blur)='onBlur($event)'
   [disabled]='disabled'

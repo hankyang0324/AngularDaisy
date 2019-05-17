@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -19,6 +19,7 @@ export class DateInputComponent implements OnInit, ControlValueAccessor {
   invalid:boolean = false;
   @Input('disabled') disabled: boolean = false;
   @Input('width') width: string;
+  @Output() getDate = new EventEmitter<string>();
 
   constructor() { }
 
@@ -26,9 +27,16 @@ export class DateInputComponent implements OnInit, ControlValueAccessor {
     this.width+='px';
   }
 
-  detectChange(event:Event) {
+  detectChange(value) {
     this.invalid = false;
-    this.onChange((<HTMLInputElement>event.target).value);
+    let arr = value.split('/');
+    for(let str of arr){
+      for(let item of str){
+        if(item<'0'||item>'9') return;
+      }
+    }
+    this.onChange(value);
+    this.date = value;
   }
 
   onClick(){
@@ -36,13 +44,14 @@ export class DateInputComponent implements OnInit, ControlValueAccessor {
   }
 
   onBlur(event:Event){
-    let val = (<HTMLInputElement>event.target).value;
-    let arr = val.split('/');
+    this.date = (<HTMLInputElement>event.target).value;
+    let arr = this.date.split('/');
     for(let str of arr){
       for(let item of str){
         if(item<'0'||item>'9') return this.invalid = true;
       }
     }
+    this.getDate.emit(this.date);
     this.invalid = false;
   }
 

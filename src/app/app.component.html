@@ -54,7 +54,9 @@
     <div>name & group & color</div>
   </hank-dropdown>
   <div>date</div>
-  <app-date-input formControlName='date'></app-date-input>
+  <app-date-input formControlName='date' (getDate)='fetchDate($event)'></app-date-input>
+  <br>
+  {{date}}
   <br>
   <button type="submit">Submit</button>
 </form>
