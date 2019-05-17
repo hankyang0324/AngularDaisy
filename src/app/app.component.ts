@@ -67,4 +67,10 @@ export class AppComponent implements OnInit{
     console.log(this.dropDownForm.value);
     this.dropDownForm.reset();
   }
+  val='';
+  onInput(event) {
+    //this.val = 1+(<HTMLInputElement>event.target).value;
+    this.val = 1+event;
+    console.log(this.val);
+  }
 }

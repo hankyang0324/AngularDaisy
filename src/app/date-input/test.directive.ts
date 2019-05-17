@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Renderer, HostListener, Output, EventEmitter, Host} from '@angular/core';
+import {Directive, ElementRef, Renderer, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Directive({
   selector: '[testDirective]'
